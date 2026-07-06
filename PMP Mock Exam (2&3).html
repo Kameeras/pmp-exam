@@ -1,0 +1,1627 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PMP Choose Two/Three Mock Exam</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="light"]{
+  --bg:#f7f6f2;--surface:#ffffff;--surface2:#fbfaf6;--text:#1f1c15;--muted:#6b6964;
+  --inverse:#f9f8f4;--primary:#01696f;--primary-hover:#0c4e54;--primary-soft:rgba(1,105,111,.10);
+  --border:rgba(40,37,29,.12);--success:#2f7d32;--error:#c62828;--warn:#e08a1f;
+  --r:.85rem;--shadow:0 2px 8px rgba(35,33,29,.06);--shadow-lg:0 12px 30px rgba(35,33,29,.10);
+}
+[data-theme="dark"]{
+  --bg:#141311;--surface:#1c1b19;--surface2:#221f1c;--text:#ece9e3;--muted:#b5b0a8;
+  --inverse:#141311;--primary:#4fb1bb;--primary-hover:#2f8f99;--primary-soft:rgba(79,177,187,.15);
+  --border:rgba(255,255,255,.10);--success:#7ac47a;--error:#ff7c7c;--warn:#f2b453;
+  --shadow:0 2px 8px rgba(0,0,0,.35);--shadow-lg:0 12px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font:16px/1.6 'Satoshi',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:none;background:none}
+h1,h2,h3,h4,p{margin:0}
+.hidden{display:none!important}
+.container{max-width:1100px;margin:0 auto;padding:2rem 1.25rem}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.brand{font-weight:900;font-size:1.05rem;color:var(--primary);letter-spacing:.02em}
+.theme-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--surface);display:grid;place-items:center;transition:.2s}
+.theme-btn:hover{background:var(--primary-soft)}
+.btn{background:var(--primary);color:var(--inverse);padding:.95rem 1.6rem;border-radius:var(--r);font-weight:700;transition:.2s;display:inline-flex;align-items:center;gap:.5rem;font-size:1rem}
+.btn:hover{background:var(--primary-hover);transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn2{background:var(--surface);color:var(--text);padding:.85rem 1.4rem;border-radius:var(--r);font-weight:600;border:1px solid var(--border);transition:.2s}
+.btn2:hover{background:var(--primary-soft);border-color:var(--primary)}
+.btn2:disabled{opacity:.4;cursor:not-allowed}
+.btn-danger{background:var(--error);color:#fff}
+.btn-danger:hover{background:#a32020;transform:translateY(-1px)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.tag{display:inline-block;padding:.28rem .7rem;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+
+/* WELCOME */
+.hero{text-align:center;padding:2.5rem 1rem 1.5rem}
+.hero h1{font-size:clamp(2rem,1.4rem + 2.5vw,3.2rem);font-weight:900;letter-spacing:-.02em;margin-bottom:.5rem}
+.hero .subtitle{font-size:1.1rem;color:var(--muted);max-width:640px;margin:0 auto}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;text-align:center;box-shadow:var(--shadow)}
+.stat .num{font-size:2.2rem;font-weight:900;color:var(--primary);line-height:1}
+.stat .lbl{color:var(--muted);font-size:.85rem;margin-top:.4rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.section{margin-top:1.5rem}
+.section h2{font-size:1.35rem;font-weight:800;margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
+.section h2::before{content:"";width:4px;height:22px;background:var(--primary);border-radius:2px}
+.instructions{list-style:none;padding:0;margin:0;counter-reset:step}
+.instructions li{counter-increment:step;padding:.75rem 0 .75rem 3rem;position:relative;border-bottom:1px solid var(--border)}
+.instructions li:last-child{border-bottom:none}
+.instructions li::before{content:counter(step);position:absolute;left:0;top:.75rem;width:2rem;height:2rem;border-radius:50%;background:var(--primary-soft);color:var(--primary);font-weight:800;display:grid;place-items:center;font-size:.9rem}
+.tips{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;list-style:none;padding:0;margin:0}
+.tips li{padding:.9rem 1rem;background:var(--surface2);border-left:3px solid var(--primary);border-radius:.5rem;font-size:.95rem}
+.start-wrap{text-align:center;margin:2.5rem 0 1rem}
+.start-wrap .btn{padding:1.15rem 3rem;font-size:1.1rem}
+
+/* EXAM */
+.exam-layout{display:grid;grid-template-columns:280px 1fr;gap:1.25rem;max-width:1200px;margin:0 auto;padding:1rem 1.25rem}
+.sidebar{position:sticky;top:1rem;align-self:start;display:flex;flex-direction:column;gap:1rem;max-height:calc(100vh - 2rem);overflow-y:auto}
+.timer-card{background:linear-gradient(135deg,var(--primary),var(--primary-hover));color:var(--inverse);padding:1.15rem 1.25rem;border-radius:var(--r);box-shadow:var(--shadow-lg)}
+.timer-card .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;opacity:.85;font-weight:600}
+.timer-card .time{font-size:2.4rem;font-weight:900;font-variant-numeric:tabular-nums;line-height:1;margin-top:.25rem}
+.timer-card.warn{background:linear-gradient(135deg,#e08a1f,#c17010)}
+.timer-card.critical{background:linear-gradient(135deg,#c62828,#8f1e1e);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.85}}
+.progress-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1rem;box-shadow:var(--shadow)}
+.progress-card .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.progress-card .cnt{font-size:1.1rem;font-weight:800;margin:.25rem 0 .5rem}
+.progress-bar{height:8px;background:var(--primary-soft);border-radius:4px;overflow:hidden}
+.progress-bar > div{height:100%;background:var(--primary);transition:width .3s;border-radius:4px}
+.nav-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1rem;box-shadow:var(--shadow)}
+.nav-card h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;margin-bottom:.6rem}
+.nav-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.35rem}
+.nav-btn{aspect-ratio:1;border:1px solid var(--border);background:var(--surface2);border-radius:.4rem;font-size:.72rem;font-weight:700;color:var(--muted);position:relative;transition:.15s;display:grid;place-items:center}
+.nav-btn:hover{border-color:var(--primary);color:var(--primary)}
+.nav-btn.answered{background:var(--primary-soft);color:var(--primary);border-color:transparent}
+.nav-btn.current{outline:2px solid var(--primary);outline-offset:1px}
+.nav-btn.flagged::after{content:"";position:absolute;top:2px;right:2px;width:6px;height:6px;background:var(--warn);border-radius:50%}
+.legend{display:flex;flex-direction:column;gap:.35rem;margin-top:.75rem;font-size:.72rem;color:var(--muted)}
+.legend .dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:.35rem;vertical-align:middle}
+
+.main-exam{display:flex;flex-direction:column;gap:1rem}
+.qcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;box-shadow:var(--shadow)}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.qhead .left{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.qtext{font-size:1.08rem;font-weight:600;margin:.5rem 0 1.25rem;line-height:1.55}
+.opts{display:grid;gap:.65rem}
+.opt{display:flex;gap:.85rem;padding:.95rem 1.05rem;border:1.5px solid var(--border);border-radius:.65rem;background:var(--surface2);cursor:pointer;transition:.15s;align-items:flex-start}
+.opt:hover{border-color:var(--primary);background:var(--primary-soft)}
+.opt.selected{border-color:var(--primary);background:var(--primary-soft)}
+.opt input{margin-top:.25rem;accent-color:var(--primary);flex-shrink:0}
+.opt-letter{font-weight:800;color:var(--primary);min-width:1.5rem}
+.controls{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap}
+.flag-btn{padding:.75rem 1.1rem;border:1.5px solid var(--border);border-radius:var(--r);background:var(--surface);font-weight:600;font-size:.9rem;display:inline-flex;align-items:center;gap:.4rem;transition:.15s}
+.flag-btn:hover{border-color:var(--warn);color:var(--warn)}
+.flag-btn.active{background:var(--warn);color:#fff;border-color:var(--warn)}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:grid;place-items:center;z-index:100;padding:1rem}
+.modal{background:var(--surface);border-radius:var(--r);padding:2rem;max-width:460px;width:100%;box-shadow:var(--shadow-lg)}
+.modal h3{font-size:1.3rem;margin-bottom:.75rem}
+.modal p{color:var(--muted);margin-bottom:1.5rem}
+.modal .row{display:flex;gap:.75rem;justify-content:flex-end;flex-wrap:wrap}
+
+/* RESULTS */
+.score-hero{text-align:center;padding:2rem 1rem 1rem}
+.score-circle{width:200px;height:200px;border-radius:50%;margin:0 auto 1.5rem;display:grid;place-items:center;background:conic-gradient(var(--primary) calc(var(--pct)*1%),var(--primary-soft) 0);position:relative}
+.score-circle::before{content:"";position:absolute;inset:14px;background:var(--surface);border-radius:50%}
+.score-circle > div{position:relative;text-align:center}
+.score-circle .pct{font-size:2.6rem;font-weight:900;color:var(--primary);line-height:1}
+.score-circle .lbl{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-top:.25rem}
+.badge{display:inline-block;padding:.5rem 1.25rem;border-radius:999px;font-weight:800;font-size:1rem;letter-spacing:.03em}
+.badge.pass{background:rgba(47,125,50,.15);color:var(--success)}
+.badge.fail{background:rgba(198,40,40,.15);color:var(--error)}
+.result-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1.5rem 0}
+.rstat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1rem;text-align:center;box-shadow:var(--shadow)}
+.rstat .num{font-size:1.6rem;font-weight:800;line-height:1}
+.rstat .lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:700;margin-top:.35rem}
+.rstat.correct .num{color:var(--success)}
+.rstat.incorrect .num{color:var(--error)}
+.review-list{display:flex;flex-direction:column;gap:.85rem;margin-top:1rem}
+.review-item{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--error);border-radius:var(--r);padding:1.15rem;box-shadow:var(--shadow)}
+.review-item .qnum{font-size:.75rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.review-item .qt{font-weight:600;margin:.35rem 0 .85rem}
+.review-item .ans{margin:.65rem 0;font-size:.94rem}
+.review-item .ans > strong{display:block;margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.ans-body{padding:.6rem .85rem;border-radius:.5rem;background:var(--surface2);font-size:.94rem;line-height:1.55}
+.ans-body.wrong{border-left:3px solid var(--error);color:var(--text)}
+.ans-body.right{border-left:3px solid var(--success);color:var(--text)}
+.ans-body.all{border-left:3px solid var(--primary);color:var(--text)}
+.ans-line.correct-choice{background:rgba(47,125,50,.14);border:1px solid rgba(47,125,50,.18);border-radius:.35rem;padding-left:.45rem;padding-right:.45rem}
+.ans-line.user-selected{background:rgba(198,40,40,.10);border:1px solid rgba(198,40,40,.18);border-radius:.35rem;padding-left:.45rem;padding-right:.45rem}
+.ans-line.correct-choice.user-selected{background:rgba(47,125,50,.18);border-color:rgba(47,125,50,.25)}
+.ans-note{font-size:.78rem;font-weight:800;color:var(--muted);margin-left:.45rem}
+.ans-body em{color:var(--muted)}
+.ans-line{padding:.15rem 0}
+.ans-line + .ans-line{border-top:1px dashed var(--border);margin-top:.35rem;padding-top:.45rem}
+.ans-letter{font-weight:800;margin-right:.35rem}
+.ans-body.wrong .ans-letter{color:var(--error)}
+.ans-body.right .ans-letter{color:var(--success)}
+.expl{margin-top:.75rem;padding-top:.7rem;border-top:1px dashed var(--border);color:var(--muted);font-size:.92rem;line-height:1.55}
+.result-actions{display:flex;gap:.75rem;justify-content:center;margin-top:2rem;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .exam-layout{grid-template-columns:1fr}
+  .sidebar{position:relative;top:auto;max-height:none}
+  .nav-grid{grid-template-columns:repeat(10,1fr)}
+  .stats{grid-template-columns:1fr}
+  .tips{grid-template-columns:1fr}
+  .result-stats{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ============== WELCOME SCREEN ============== -->
+<section id="welcomeScreen" class="container">
+  <div class="topbar">
+    <span class="brand">PMP CHOOSE 2/3 MOCK EXAM</span>
+    <button class="theme-btn" id="themeBtn" title="Toggle theme"></button>
+  </div>
+
+  <div class="hero">
+    <h1>PMP Choose Two/Three Mock Exam</h1>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num" id="totalQ">0</div><div class="lbl">Total Questions</div></div>
+    <div class="stat"><div class="num">60</div><div class="lbl">Minutes</div></div>
+    <div class="stat"><div class="num">80%</div><div class="lbl">Suggested Pass</div></div>
+  </div>
+
+  <div class="card section">
+    <h2>Instructions</h2>
+    <ol class="instructions">
+    <li>Same as before, bas added review enhancement: after submitting, you will see <strong>all answer choices</strong> for the incorrect questions. The <strong>correct</strong> answers will be highlighted in <strong>green</strong>, and your <strong>wrong</strong> selections will be highlighted in <strong>red</strong>. + selections are limited based on what the question asks, ya3ni law: <strong>Choose two = max 2</strong>, w bel <strong>Choose three = max 3</strong>.</li>
+
+    </ol>
+  </div>
+
+  <div class="start-wrap">
+    <button class="btn" id="startBtn">Start Exam &nbsp;→</button>
+  </div>
+</section>
+
+<!-- ============== EXAM SCREEN ============== -->
+<section id="examScreen" class="hidden">
+  <div class="topbar container" style="max-width:1200px;padding-bottom:0">
+    <span class="brand">PMP CHOOSE 2/3 MOCK EXAM</span>
+    <button class="theme-btn" id="themeBtn2" title="Toggle theme"></button>
+  </div>
+
+  <div class="exam-layout">
+    <aside class="sidebar">
+      <div class="timer-card" id="timerCard">
+        <div class="lbl">Time remaining</div>
+        <div class="time" id="timeDisplay">60:00</div>
+      </div>
+
+      <div class="progress-card">
+        <div class="lbl">Progress</div>
+        <div class="cnt"><span id="answeredCount">0</span> / <span id="totalCount">0</span> answered</div>
+        <div class="progress-bar"><div id="progressFill" style="width:0%"></div></div>
+      </div>
+
+      <div class="nav-card">
+        <h4>Question Navigator</h4>
+        <div class="nav-grid" id="navGrid"></div>
+        <div class="legend">
+          <div><span class="dot" style="background:var(--surface2);border:1px solid var(--border)"></span>Not visited</div>
+          <div><span class="dot" style="background:var(--primary-soft)"></span>Answered</div>
+          <div><span class="dot" style="background:var(--warn)"></span>Flagged</div>
+        </div>
+      </div>
+
+      <button class="btn" id="submitBtn" style="width:100%;justify-content:center">Submit Exam</button>
+    </aside>
+
+    <main class="main-exam">
+      <div class="qcard" id="qcard"></div>
+      <div class="controls">
+        <button class="btn2" id="prevBtn">← Previous</button>
+        <button class="flag-btn" id="flagBtn">⚑ Flag for Review</button>
+        <button class="btn" id="nextBtn">Next →</button>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- ============== RESULTS SCREEN ============== -->
+<section id="resultsScreen" class="container hidden">
+  <div class="topbar">
+    <span class="brand">PMP CHOOSE 2/3 MOCK EXAM · RESULTS</span>
+    <button class="theme-btn" id="themeBtn3" title="Toggle theme"></button>
+  </div>
+
+  <div class="card">
+    <div class="score-hero">
+      <div class="score-circle" id="scoreCircle" style="--pct:0">
+        <div>
+          <div class="pct" id="scorePct">0%</div>
+          <div class="lbl">Your Score</div>
+        </div>
+      </div>
+      <div id="passBadge" class="badge fail">RESULT</div>
+    </div>
+
+    <div class="result-stats">
+      <div class="rstat correct"><div class="num" id="rCorrect">0</div><div class="lbl">Correct</div></div>
+      <div class="rstat incorrect"><div class="num" id="rWrong">0</div><div class="lbl">Incorrect</div></div>
+      <div class="rstat"><div class="num" id="rUnans">0</div><div class="lbl">Unanswered</div></div>
+      <div class="rstat"><div class="num" id="rTime">0:00</div><div class="lbl">Time Taken</div></div>
+    </div>
+
+    <div class="section">
+      <h2>Review Incorrect Answers</h2>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn" id="retakeBtn">Retake Exam</button>
+      <button class="btn2" id="homeBtn">Back to Home</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SUBMIT CONFIRM MODAL ============== -->
+<div class="modal-bg hidden" id="confirmModal">
+  <div class="modal">
+    <h3>Submit exam?</h3>
+    <p id="modalMsg">Are you sure you want to submit? You won't be able to change your answers.</p>
+    <div class="row">
+      <button class="btn2" id="cancelSubmit">Cancel</button>
+      <button class="btn btn-danger" id="confirmSubmit">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    "id": 22,
+    "topic": "PMP",
+    "text": "A project manager is overseeing a project as part of a program geared toward a major technology disruption. The team is comprised of brilliant young professionals who have worked on different projects for the organization in the past. However, the team complained that they previously experienced a lack of direction during project execution and are afraid of the same issue in this project. Which two actions should the project manager take to ensure that this issue does not occur in this project? (Choose two.)",
+    "choices": [
+      "Organize a team-bonding activity and invite an external manager to speak to the team.",
+      "Set a clear vision for the project and ensure it is visible to all stakeholders.",
+      "Focus on the resource management plan and track project progress.",
+      "Encourage the team to do a brainstorming session and provide a mitigation plan.",
+      "Keep the team engaged and focused on the project's direction."
+    ],
+    "answers": [
+      "B",
+      "E"
+    ],
+    "explanation": "A clear project vision and continuous engagement ensure team alignment and direction.",
+    "type": "multi"
+  },
+  {
+    "id": 83,
+    "topic": "PMP",
+    "text": "A business transformation project has a four-phase delivery plan. The project team has successfully delivered one phase of the project. To further enhance team performance and empower team members, which two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Encourage team members to cross-check decisions with the project manager.",
+      "Vet all of the decisions before execution.",
+      "Allow team members to make limited decisions.",
+      "Organize and assign team members to tasks where they have strengths.",
+      "Support team members to make decisions in their areas of strength."
+    ],
+    "answers": [
+      "D",
+      "E"
+    ],
+    "explanation": "Assigning tasks based on strengths and empowering team members to make decisions enhances performance.",
+    "type": "multi"
+  },
+  {
+    "id": 131,
+    "topic": "PMP",
+    "text": "A large multi-year project requires highly skilled staff for successful deployment. The management team and the project sponsor have analyzed the resource requirements and agreed to have permanent staff hired for the project to avoid potential budget overrun. However, there is a risk of staff turnover during the course of the project, which may have an impact on the delivery. Which two actions should the project manager take to mitigate this risk? (Choose two.)",
+    "choices": [
+      "Meet with management to discuss dividing the project into smaller projects.",
+      "Convince senior management to hire third-party staff.",
+      "Enhance the competencies of the project team through training, mentoring, and coaching.",
+      "Increase the trained staff to create a backup for resources.",
+      "Introduce a recognition program to motivate and reward resource performance."
+    ],
+    "answers": [
+      "C",
+      "E"
+    ],
+    "explanation": "Developing team competencies and implementing a recognition program help mitigate staff turnover risks.",
+    "type": "multi"
+  },
+  {
+    "id": 146,
+    "topic": "PMP",
+    "text": "An agile project is in its eighth iteration out of 16. After the last iteration review, the team members receive feedback from the security department about regulations with which the project must comply. Which two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Ask the product owner to include the requirements in the product backlog.",
+      "Ask the security department for details about regulations.",
+      "Ask the stakeholders about the priority of this regulation.",
+      "Ask the team members to include the requirements in the next iteration.",
+      "Ask the team members to analyze the impact of including this regulation."
+    ],
+    "answers": [
+      "B",
+      "E"
+    ],
+    "explanation": "Without clarity from the security department for details about regulations, the team cannot assess impact or plan implementation. Once the regulation is understood, the team must analyze its impact.",
+    "type": "multi"
+  },
+  {
+    "id": 180,
+    "topic": "PMP",
+    "text": "A large project is affecting the neighborhood in which it is located. The neighbors are not satisfied with the project, and their resistance to the project may affect the project deadline. What two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Send letters to the neighbors and ask them kindly not to disturb the project.",
+      "Set up a meeting with neighborhood representatives to win their cooperation.",
+      "Analyze the situation and find out what is causing the neighborhood's negative attitude.",
+      "Ask the customer to extend the project deadline to allow time for conflict resolution.",
+      "Ask the mayor of the city to use their authority to stop neighborhood resistance."
+    ],
+    "answers": [
+      "B",
+      "C"
+    ],
+    "explanation": "Engaging with the neighborhood and addressing their concerns helps build support and reduces resistance.",
+    "type": "multi"
+  },
+  {
+    "id": 181,
+    "topic": "PMP",
+    "text": "A new team member is added to a self-organizing team. The new team member is reluctant to speak and take part in team discussions or decisions. Which two actions should the team take to engage this new team member? (Choose two.)",
+    "choices": [
+      "Revisit the team's discussion on team behaviors and norms.",
+      "Report to the project manager about the new team member's behavior.",
+      "Coach the new team member to improve engagement with the team.",
+      "Force the new team member to participate in activities that are considered easy.",
+      "Facilitate an open discussion on all ideas and perspectives."
+    ],
+    "answers": [
+      "A",
+      "C"
+    ],
+    "explanation": "Coaching supports individual growth, and open discussions promote psychological safety-both essential to help a new team member integrate in a self-organizing agile team.",
+    "type": "multi"
+  },
+  {
+    "id": 182,
+    "topic": "PMP",
+    "text": "During the execution of a project, the project manager notices that only one team member has one of the technical skills needed to build the product. The project manager is afraid this might have a future impact on the quality and schedule because most of the upcoming activities will require at least three people with this specific skill. What two actions should the project manager take to prevent the team from being unqualified? (Choose two.)",
+    "choices": [
+      "Exclude the activities from the roadmap.",
+      "Encourage working in pairs and knowledge sharing.",
+      "Teach the entire team the new skill.",
+      "Facilitate a training event with an external trainer.",
+      "Increase the time estimates on the activities that require such abilities."
+    ],
+    "answers": [
+      "B",
+      "D"
+    ],
+    "explanation": "Knowledge sharing and formal training ensure that multiple team members are equipped with the necessary skills.",
+    "type": "multi"
+  },
+  {
+    "id": 183,
+    "topic": "PMP",
+    "text": "The team is working on a critical project deliverable, and the project manager is concerned about meeting the deadline. There have been complaints from some stakeholders about some of the team members' performance. The project manager wants to understand the situation and provide feedback to the team as soon as possible. What three actions should the project manager take to address this situation? (Choose three.)",
+    "choices": [
+      "Define team ground rules.",
+      "Perform a retrospective session.",
+      "Implement daily team meetings.",
+      "Request a manager performance review.",
+      "Conduct an annual review."
+    ],
+    "answers": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "Establishing ground rules, conducting retrospectives, and holding daily meetings improve team performance and accountability.",
+    "type": "multi"
+  },
+  {
+    "id": 193,
+    "topic": "PMP",
+    "text": "A team member shares with their functional manager some negative details about the performance of another team member that was discussed during the retrospective. The project manager finds out about this discussion. What two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Contact the team member's functional manager and invite them to the next retrospective.",
+      "Meet with the entire team to review the ground rules about safe environments.",
+      "Meet with the product owner to talk about the situation.",
+      "Contact the team member to explain what information can be shared outside the team.",
+      "Meet with the sponsor to review the situation."
+    ],
+    "answers": [
+      "B",
+      "D"
+    ],
+    "explanation": "Reinforcing safe environment rules and discussing proper information sharing prevents future conflicts.",
+    "type": "multi"
+  },
+  {
+    "id": 208,
+    "topic": "PMP",
+    "text": "A project manager is assigned to a project that is in development. As the project manager reviews the project's progress, they find a few tasks that are behind schedule. After investigating, the project manager discovers that a few team members were pulled to work on other assignments, which impacted their ability to focus on the project manager's project. Which two actions can the project manager take to bring the team back on track? (Choose two.)",
+    "choices": [
+      "Establish daily standups to review project progress and track the completion of deliverables.",
+      "Allow the team members to catch up at their own pace.",
+      "Alert the business stakeholders immediately of the schedule delay.",
+      "Discuss the risk of project delay and work priorities with the respective functional managers.",
+      "Work with the team to identify options to accelerate project delivery."
+    ],
+    "answers": [
+      "D",
+      "E"
+    ],
+    "explanation": "It addresses both the resource conflict at the root of the delay (via functional managers) and promotes team collaboration to find realistic solutions for recovery.",
+    "type": "multi"
+  },
+  {
+    "id": 254,
+    "topic": "PMP",
+    "text": "During a project's execution phase, two team members are having conflicts with other team members within the team on technical and interpersonal levels. Which two actions should the project manager take first to address this conflict? (Choose two.)",
+    "choices": [
+      "Plan to resolve the team members' conflicts after the sprint and focus on achieving the goal.",
+      "Arrange individual meetings with the team members who cannot work together effectively.",
+      "Address the conflict during team meetings for the entire team to participate and find solutions.",
+      "Ask human resources (HR) to intervene before it escalates and affects the team's performance.",
+      "Discuss the conflict early among the affected team members using a direct, collaborative approach."
+    ],
+    "answers": [
+      "B",
+      "E"
+    ],
+    "explanation": "Early intervention and direct collaboration help resolve conflicts efficiently while maintaining team harmony.",
+    "type": "multi"
+  },
+  {
+    "id": 269,
+    "topic": "PMP",
+    "text": "A company is launching a new product and decides to transition from a predictive to an agile approach. During the third sprint, the project manager notices that the team is not working as a cohesive unit. Which two rules are appropriate for the project manager to instill in the team? (Choose two.)",
+    "choices": [
+      "Work together daily as a team.",
+      "Strive toward continuous improvement.",
+      "Send communications to the entire team.",
+      "Follow the sprint planning.",
+      "Only share suggestions at the end of the sprint."
+    ],
+    "answers": [
+      "A",
+      "B"
+    ],
+    "explanation": "Encouraging teamwork and continuous improvement ensures alignment with agile principles and enhances performance.",
+    "type": "multi"
+  },
+  {
+    "id": 288,
+    "topic": "PMP",
+    "text": "The project team is planning a schedule with limited information. The team is having issues identifying the detailed tasks and estimating task duration. Which three techniques should the project manager use? (Choose three.)",
+    "choices": [
+      "Gantt chart that includes milestones and deadlines",
+      "Rolling wave planning and an adaptive approach",
+      "Relative estimation to determine the task or deliverable sizes",
+      "Iterations and reviews to continuously keep adapting the plan",
+      "Bottom-up estimating based on a work breakdown structure (WBS)"
+    ],
+    "answers": [
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": "Rolling wave planning allows for iterative development of detailed plans as more information becomes available, while relative estimation and continuous adaptation ensure flexibility.",
+    "type": "multi"
+  },
+  {
+    "id": 303,
+    "topic": "PMP",
+    "text": "A project manager is managing a new type of project for a traditional organization. The culture of the organization is not typically in support of change. Which two factors should the project manager consider in developing the portion of the project plan related to culture? (Choose two.)",
+    "choices": [
+      "The relevant experience and qualifications of each team member.",
+      "The amount of flexibility the team exercises while doing work.",
+      "The amount of risk the organization is willing to accept.",
+      "The speed the team can perform without compromising quality.",
+      "The influence of the stakeholders on the project."
+    ],
+    "answers": [
+      "C",
+      "E"
+    ],
+    "explanation": "Understanding the organization's risk tolerance and stakeholder influence ensures the project plan aligns with the company's culture and decision-making process.",
+    "type": "multi"
+  },
+  {
+    "id": 320,
+    "topic": "PMP",
+    "text": "A sponsor requires that the established quality standards for the project be met. As a result, the sponsor asks the project manager for stable measures to ensure that the quality is met. Which three actions should the project manager do? (Choose three.)",
+    "choices": [
+      "Identify in the iteration planning the acceptance criteria that meet quality standards.",
+      "Identify the acceptance criteria during the retrospective that meet the quality standards.",
+      "Analyze the lessons learned to determine appropriate testing metrics in quality standards.",
+      "Incorporate performance metrics on the verified deliverables according to quality standards.",
+      "Perform a risk analysis to determine the impact of not complying with quality standards."
+    ],
+    "answers": [
+      "A",
+      "C",
+      "D"
+    ],
+    "explanation": "A, C, and D focus on proactive and measurable actions to ensure that quality standards are understood, tracked, and verified - which aligns directly with the sponsor's request for stable quality measures..",
+    "type": "multi"
+  },
+  {
+    "id": 348,
+    "topic": "PMP",
+    "text": "A project for developing software for a retail company's procurement system is in the initiation phase. The project sponsor has expressed concern that the forecasted project implementation date coincides with the company's financial budget planning period. Which two actions should the project manager take next to address this concern? (Choose two.)",
+    "choices": [
+      "Advise the sponsor that it is not feasible to determine if the end date will be met as the project is in the initiation phase.",
+      "Facilitate a risk workshop with all stakeholders in attendance to identify and assess all risks to the project.",
+      "Log the concern as a risk in the project risk register and assess the impact and severity of the risk.",
+      "Change the project implementation date so that the concern is alleviated and no longer applicable.",
+      "Communicate to the project sponsor that the implementation date is low risk and will not impact the project."
+    ],
+    "answers": [
+      "B",
+      "C"
+    ],
+    "explanation": "Identifying and assessing risks early allows the project team to develop mitigation strategies before they impact the project.",
+    "type": "multi"
+  },
+  {
+    "id": 367,
+    "topic": "PMP",
+    "text": "A project manager has just been assigned to a new project. The project manager's first task is to present the project benefits to the stakeholders. Which three items should form part of the presentation? (Choose three.)",
+    "choices": [
+      "Risks associated with achieving the target benefits",
+      "Stakeholder register",
+      "Communications management plan",
+      "Expected business value",
+      "Metrics to measure benefits throughout the project"
+    ],
+    "answers": [
+      "A",
+      "D",
+      "E"
+    ],
+    "explanation": "The project benefits presentation should include the expected business value, risks associated with achieving those benefits, and measurable metrics.",
+    "type": "multi"
+  },
+  {
+    "id": 391,
+    "topic": "PMP",
+    "text": "A junior project manager was recently hired to lead a complex project scheduled to kick off in 2 weeks. The junior project manager was introduced to another project manager for mentoring. Which two benefits will the junior project manager realize by being assigned to a mentor? (Choose two.)",
+    "choices": [
+      "The mentor will be involved in the decision-making processes implemented by the junior project manager.",
+      "The mentor can provide past project documentation with early warning indicators that potential problems could occur.",
+      "The mentor will be immediately available to take over the project if there are problems or project delays.",
+      "The junior project manager reports administratively to their mentor so that human resource (HR) questions can be answered quickly.",
+      "The junior project manager can discuss certain problems with their mentor without fear of retribution."
+    ],
+    "answers": [
+      "B",
+      "E"
+    ],
+    "explanation": "Access to past project documentation and having a safe space to discuss concerns without fear of repercussions are key benefits of mentorship.",
+    "type": "multi"
+  },
+  {
+    "id": 408,
+    "topic": "PMP",
+    "text": "A project team is globally distributed with team members living and working in different time zones. The project manager is trying to get the team to collaborate effectively. Which three actions should the project manager take to accomplish this goal? (Choose three.)",
+    "choices": [
+      "Send out a survey to review the preferred method, timing, and frequency for communications.",
+      "Review the communications strategy with the team regularly with a view for continuous improvement.",
+      "Compile a communications management plan with input from all stakeholders and distribute it for review and approval.",
+      "Require the team to have daily mandatory meetings with the project management office (PMO).",
+      "Recommend the use of formal written documentation in all project communications."
+    ],
+    "answers": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "A customized communications strategy based on team preferences ensures effective collaboration.",
+    "type": "multi"
+  },
+  {
+    "id": 416,
+    "topic": "PMP",
+    "text": "A company's leadership team has decided to invest in a new product using an agile approach. The commercial and product teams have started the planning activity for this new venture. Which three key factors does the project manager need in order to deliver this product? (Choose three.)",
+    "choices": [
+      "Product roadmap",
+      "Schedule performance indexes (SPIs)",
+      "Product vision",
+      "Key performance indicators (KPIs)",
+      "High-level product backlog"
+    ],
+    "answers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": "The product vision sets the direction, the product roadmap provides the delivery timeline, and the high-level product backlog offers the detailed scope for planning and delivery.",
+    "type": "multi"
+  },
+  {
+    "id": 454,
+    "topic": "PMP",
+    "text": "The customer wants to show their stakeholders a tangible outcome faster. This requires advancing a milestone. Which two actions should the project manager do? (Choose two.)",
+    "choices": [
+      "Review the customer's priorities regarding the desired requirements for the milestones.",
+      "Convince the customer to keep the requirements as is and not move the milestone.",
+      "Discuss which requirements can be delivered faster with the project team.",
+      "Inform the customer that moving the milestone has a very high impact on project cost.",
+      "Escalate the issue to senior management so they can impose a solution on the customer."
+    ],
+    "answers": [
+      "A",
+      "C"
+    ],
+    "explanation": "Understanding priorities and identifying faster deliverables helps balance expectations and feasibility.",
+    "type": "multi"
+  },
+  {
+    "id": 464,
+    "topic": "PMP",
+    "text": "A project team member raised a risk that the threat of country-wide power cuts may affect the project time line for a software development project. In the last month, this risk materialized and the project time line had to be extended by 2 months. Which two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Ask the team member to work overtime to make up the time lost so that the project schedule is not impacted",
+      "Log it in the risk register and work with the relevant owner to implement the mitigation action plan",
+      "Analyze the impact of the issue and submit a change request to update the project schedule",
+      "Inform the project sponsor that the risk has materialized and request that the project budget be increased",
+      "Extend the project deadline and update the project schedule to reflect the delay"
+    ],
+    "answers": [
+      "B",
+      "C"
+    ],
+    "explanation": "Once a risk materializes, it becomes an issue. It should be logged, analyzed, and appropriate actions like updating the schedule through a formal change request should be taken.",
+    "type": "multi"
+  },
+  {
+    "id": 535,
+    "topic": "PMP",
+    "text": "A project manager at a large corporation has been assigned to oversee a customer experience project. Within the project, customer satisfaction is a big issue and there are many unresolved customer queries on a daily basis. The project manager has been informed that the customer service team is overwhelmed with these unresolved queries. Which two actions should the project manager take to correct this problem? (Choose two.)",
+    "choices": [
+      "Contact the customers in batches and inform them that the issues are being worked on currently.",
+      "Confirm the issues truly exist by conducting a survey and other analyses that may detect the real issue.",
+      "Deploy solutions that will track, prioritize, and resolve queries as soon as possible.",
+      "Ask senior management to replace the customer service manager with a more qualified one.",
+      "Request that the customer service team prioritizes work on queries that are received this week."
+    ],
+    "answers": [
+      "B",
+      "C"
+    ],
+    "explanation": "Understanding root causes and implementing tracking solutions ensures effective resolution of customer queries.",
+    "type": "multi"
+  },
+  {
+    "id": 577,
+    "topic": "PMP",
+    "text": "A project team is working on an agile software development project. The project manager is concerned that the virtual team may not be as effective as a colocated team at headquarters. Which two actions should the project manager leverage to ensure the team is meeting performance expectations? (Choose two.)",
+    "choices": [
+      "Require a monthly individual status report",
+      "Hold daily virtual meetings to review progress",
+      "Utilize a web-based kanban board",
+      "Task functional managers to drive accountability",
+      "Implement time-keeping software for team members"
+    ],
+    "answers": [
+      "B",
+      "C"
+    ],
+    "explanation": "Daily meetings improve communication, and kanban boards ensure transparency in work progress.",
+    "type": "multi"
+  },
+  {
+    "id": 580,
+    "topic": "PMP",
+    "text": "After completion of a project with specific users in various countries, the project manager's supervisor asks if the project users are satisfied with the way the project was run. What two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Send a questionnaire to the project participants and seek their feedback.",
+      "Refer to the communications management plan.",
+      "Obtain official approval on the new process from the various countries.",
+      "Prepare the lessons learned from the project phase.",
+      "Deliver the project materials to the users and see if they have any comments."
+    ],
+    "answers": [
+      "A",
+      "D"
+    ],
+    "explanation": "Gathering feedback and documenting lessons learned ensures continuous improvement in future projects.",
+    "type": "multi"
+  },
+  {
+    "id": 582,
+    "topic": "PMP",
+    "text": "A company is changing their current business model. The change requires implementing a complex project using multiple agile teams. What three options should the project manager have the testing team adopt as testing mechanisms? (Choose three.)",
+    "choices": [
+      "Story testing",
+      "Tests based on behavior and test-driven development",
+      "Independent personal testing",
+      "Security and performance testing",
+      "An experimental approach to cover all possible choices"
+    ],
+    "answers": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": "Using story testing, test-driven development, and security/performance testing ensures comprehensive quality assurance.",
+    "type": "multi"
+  },
+  {
+    "id": 588,
+    "topic": "PMP",
+    "text": "A project team has recently completed the initial sprint for developing an automated payroll system for a company. The project manager has scheduled a sprint planning meeting with the product owner and team members to discuss which features should be worked on next. Which two pieces of information does the project manager need in order to make this meeting productive and effective? (Choose two.)",
+    "choices": [
+      "Company mission and vision",
+      "Sprint goal",
+      "Sprint charter",
+      "Product backlog",
+      "Burndown chart"
+    ],
+    "answers": [
+      "B",
+      "D"
+    ],
+    "explanation": "The sprint goal and product backlog ensure the team prioritizes work effectively for the next sprint.",
+    "type": "multi"
+  },
+  {
+    "id": 620,
+    "topic": "PMP",
+    "text": "The city has decided to build a new tram station. The project will include various approaches. The construction and infrastructure work will be accomplished using a predictive life cycle, while software will be developed using an iterative life cycle. Some neighbors are resisting the project and have been asking the mayor to stop the project, even threatening legal action. What two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Discuss with the construction team alternatives on moving the new train station to another location.",
+      "Publish information on the city's website about the benefits that the new tram station will bring.",
+      "Have a meeting with the mayor and explain the importance of the new tram station to the city.",
+      "Conduct regular meetings with the neighbors to get their buy-in for the project.",
+      "Register this situation as a risk and develop a mitigation plan."
+    ],
+    "answers": [
+      "D",
+      "E"
+    ],
+    "explanation": "The project manager must both proactively engage stakeholders to reduce resistance and formally manage the risk through documentation and mitigation planning.",
+    "type": "multi"
+  },
+  {
+    "id": 646,
+    "topic": "PMP",
+    "text": "A project manager for a large multiyear industrial project has a project with diversified stakeholders from various geographical areas. Recently, the project manager encountered an issue with stakeholder engagement. Which two tools should the project manager use to determine the underlying reason for why engagement is not having the planned effect? (Choose two.)",
+    "choices": [
+      "Five whys",
+      "Communications management plan",
+      "Ishikawa diagrams",
+      "Issue log",
+      "Open-space meetings"
+    ],
+    "answers": [
+      "A",
+      "C"
+    ],
+    "explanation": "The five whys and Ishikawa diagrams help identify root causes of stakeholder engagement issues.",
+    "type": "multi"
+  },
+  {
+    "id": 657,
+    "topic": "PMP",
+    "text": "The project manager has observed that two team members have been arguing with each other openly at meetings. To push their ideas through, each team member individually spoke with the sponsor directly and made decisions without informing the project manager or other team members. What two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Ask the team members to work it out themselves.",
+      "Discuss this situation with other project managers and ask for advice.",
+      "Reiterate ground rules at the next meeting and ensure that all team members are clear about these rules.",
+      "Address the behavioral issue with each team member.",
+      "Discuss the behavior directly with their managers and request them to correct the behavior."
+    ],
+    "answers": [
+      "C",
+      "D"
+    ],
+    "explanation": "Reinforcing ground rules and addressing behavior directly helps prevent further conflicts.",
+    "type": "multi"
+  },
+  {
+    "id": 658,
+    "topic": "PMP",
+    "text": "A project manager led the implementation of an electronic invoicing project that has just been completed. The financial manager communicated that the team discovered three invoices with errors. Which two documents should the project manager update as soon as possible? (Choose two.)",
+    "choices": [
+      "Issue log.",
+      "Risk register.",
+      "Stakeholder register.",
+      "Change log.",
+      "Backlog register."
+    ],
+    "answers": [
+      "A",
+      "B"
+    ],
+    "explanation": "he invoice errors are current problems that go into the issue log, and they may indicate future risks, which should be recorded in the risk register for monitoring and mitigation.",
+    "type": "multi"
+  },
+  {
+    "id": 664,
+    "topic": "PMP",
+    "text": "A critical deliverable for the current iteration is giving the team difficulties. Functionality and quality issues are constantly emerging and delaying iteration progress. The project manager listens to the team's concerns and discovers that the work is not being well coordinated among the team members. Which two actions should the project manager take to handle this situation? (Choose two.)",
+    "choices": [
+      "Develop a team performance report to discuss in the next retrospective meeting.",
+      "Provide clear instructions on how the work should flow among the team members.",
+      "Schedule an iteration backlog refinement meeting to understand the issues.",
+      "Set up one-on-one meetings to provide feedback to the team members.",
+      "Prioritize the issues, focusing on the ones affecting the iteration goal."
+    ],
+    "answers": [
+      "C",
+      "E"
+    ],
+    "explanation": "Refining the backlog and prioritizing critical issues help the team align and resolve blockers effectively.",
+    "type": "multi"
+  },
+  {
+    "id": 755,
+    "topic": "PMP",
+    "text": "A project manager is assigned to a strategic communication project that involves subject matter experts (SMEs), interns, and new recruits. The project manager discovers that the project is not gaining much traction due to knowledge gaps from the interns. The budget for training is exhausted and the project needs to be delivered without delay. Which two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Identify the sources and specifics of the knowledge gap from the interns and new recruits.",
+      "Initiate a project change request for additional budget to train the interns and new recruits.",
+      "Ignore the issues with the project and try to deliver the project successfully without asking for training funds.",
+      "Put the interns and new recruits into groups and assign a SME as a mentor.",
+      "Hire more SMEs and inform the human resources manager to lay off the nonperforming interns and new recruits."
+    ],
+    "answers": [
+      "A",
+      "D"
+    ],
+    "explanation": "Identifying knowledge gaps and assigning mentors help address the issue without requiring additional budget.",
+    "type": "multi"
+  },
+  {
+    "id": 800,
+    "topic": "PMP",
+    "text": "A virtual team has disagreements about the client's requirements. Although the requirements are written, the language seems ambiguous for some of the team members who are working abroad. The local team members argue that the language is clear, but that there is a lack of competence from the international team members. Which two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Assign projects with local clients to the local project team members.",
+      "Train all project team members to recognize and discuss cultural differences.",
+      "Ensure that local team members explain the requirements to the international team members.",
+      "Provide training to international team members to ensure their understanding of the requirements.",
+      "Address the language ambiguity in the requirements to ensure all team members understand them."
+    ],
+    "answers": [
+      "B",
+      "E"
+    ],
+    "explanation": "Training on cultural differences fosters teamwork, and addressing language ambiguity ensures clarity in requirements.",
+    "type": "multi"
+  },
+  {
+    "id": 869,
+    "topic": "PMP",
+    "text": "A project manager is assigned to a time-bound internal project on quality improvement. During project execution, the project manager observes that a specific team member is being isolated by other team members. Which three actions should the project manager take? (Choose three.)",
+    "choices": [
+      "Identify the isolated team member as a risk and document the situation in the risk register.",
+      "Get feedback from other team members to understand what led to this situation.",
+      "Obtain feedback from the isolated team member to understand the situation.",
+      "Allow team members to resolve personal issues without involving the project manager.",
+      "Arrange and conduct team-building sessions to improve team effectiveness."
+    ],
+    "answers": [
+      "B",
+      "C",
+      "E"
+    ],
+    "explanation": "Understanding the cause of isolation, getting direct feedback, and arranging team-building activities can help improve team collaboration and morale.",
+    "type": "multi"
+  },
+  {
+    "id": 872,
+    "topic": "PMP",
+    "text": "A project manager is assigned to a yearlong project. Before the start of the design phase, a competitor announces that they will release a similar deliverable in 8 months, although with fewer features and functionality. Which two actions should the project manager take next? (Choose two.)",
+    "choices": [
+      "Modify the project management plan with an incremental approach.",
+      "Discuss and review this external risk with the project sponsor.",
+      "Update the project artifacts to include this issue.",
+      "Evaluate the impact of incremental deliverables.",
+      "Reduce the scope items of the final deliverable."
+    ],
+    "answers": [
+      "B",
+      "D"
+    ],
+    "explanation": "The project manager should assess the impact of the competitor's product and discuss potential adjustments with the sponsor to stay competitive.",
+    "type": "multi"
+  },
+  {
+    "id": 928,
+    "topic": "PMP",
+    "text": "A project manager is working on the implementation of new phases in the production process of a regulated industry. Which two stakeholders can help the project manager determine and address compliance requirements? (Choose two.)",
+    "choices": [
+      "Risk steering committee",
+      "Chief executive officer",
+      "Functional managers",
+      "Board of directors",
+      "Advisory team panel"
+    ],
+    "answers": [
+      "C",
+      "E"
+    ],
+    "explanation": "Functional managers have detailed knowledge of the operations and compliance expectations. Advisory panels are often used in regulated industries to guide compliance interpretation.",
+    "type": "multi"
+  },
+  {
+    "id": 959,
+    "topic": "PMP",
+    "text": "A project manager for an agile project is concerned that the team has been losing momentum over the last iterations. Which two tools should the project manager use to analyze team performance? (Choose two.)",
+    "choices": [
+      "Burndown chart",
+      "Product backlog burnup chart",
+      "Cumulative flow diagram of completed features",
+      "Work breakdown structure (WBS)",
+      "Project schedule"
+    ],
+    "answers": [
+      "A",
+      "C"
+    ],
+    "explanation": "The Burndown Chart and Cumulative Flow Diagram are effectively track progress, identify delays, and analyze team performance in an agile setting.",
+    "type": "multi"
+  },
+  {
+    "id": 963,
+    "topic": "PMP",
+    "text": "A key project stakeholder has started to escalate all issues and main requirements to the project sponsor. The project manager is concerned about the team not receiving direct communications from this stakeholder. Which two actions should the project manager take to improve the relationship with the stakeholder? (Choose two.)",
+    "choices": [
+      "Provide training to the team on emotional intelligence and status reporting techniques",
+      "Promote an adaptive and transparent environment where the team can easily communicate with the stakeholders",
+      "Share weekly status reports with detailed information about the project and team performance",
+      "Submit performance reports and task assignments to keep the stakeholder informed",
+      "Schedule regular meetings with the key stakeholder to provide updates and receive feedback"
+    ],
+    "answers": [
+      "B",
+      "E"
+    ],
+    "explanation": "Transparent communication and stakeholder engagement improve project collaboration.",
+    "type": "multi"
+  },
+  {
+    "id": 964,
+    "topic": "PMP",
+    "text": "A project manager is leading a multiyear project that involves internal and external stakeholders. As the project manager begins to gather requirements, additional business stakeholders express interest in being involved. Which three actions should the project manager take to ensure proper stakeholder involvement? (Choose three.)",
+    "choices": [
+      "Prioritize stakeholders based on the project phase and need",
+      "Perform a stakeholder assessment to align with the project objectives",
+      "Classify and rank stakeholders based on their positions in the organization",
+      "Include all stakeholders in the stakeholder engagement plan and provide the same level of communication",
+      "Develop a stakeholder impact/influence matrix to determine the level of engagement"
+    ],
+    "answers": [
+      "A",
+      "B",
+      "E"
+    ],
+    "explanation": "Stakeholder assessment, prioritization, and engagement strategies ensure smooth project execution.",
+    "type": "multi"
+  },
+  {
+    "id": 1044,
+    "topic": "PMP",
+    "text": "In a hybrid project, the customer has issued a contract that specifies the deliverables for each quarter. The customer wants to show their stakeholders a tangible outcome in the first quarter and wants to move the second milestone to the first quarter. The project manager explains to the customer that it is not feasible unless the requirements for the second milestone are changed. Which two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Ask the customer for their priorities regarding the requirements for the second milestone.",
+      "Escalate the issue to upper management to resolve the problem, and suggest a plan.",
+      "Convince the customer to leave the second milestone in place and not change it.",
+      "Tell the customer that moving the milestone has a very high impact on the cost of the project.",
+      "Go back to the development team and discuss which second milestone requirements can be performed in the first quarter."
+    ],
+    "answers": [
+      "A",
+      "E"
+    ],
+    "explanation": "Understanding customer priorities and consulting with the team enables a feasible plan to accommodate the request.",
+    "type": "multi"
+  },
+  {
+    "id": 1060,
+    "topic": "PMP",
+    "text": "A project manager has been assigned to an education project with the objective of training a workforce in application development. One of the deliverables is to provide internships to the best students in the customer's active projects. However, the customer does not have enough projects in progress right now. The project manager decides to create several internal projects to ensure the internships. Which three actions should the project manager take to fulfill this scenario without adding costs for the customer? (Choose three.)",
+    "choices": [
+      "Create a work breakdown structure (WBS) of the new scope with the internal projects.",
+      "Create a change request with the scope of the new internal projects.",
+      "Use the project's contingency budget.",
+      "Influence the client to initiate a new project.",
+      "Manage the quality of the delivery."
+    ],
+    "answers": [
+      "A",
+      "B",
+      "E"
+    ],
+    "explanation": "Defining the new work scope, managing quality, and formally submitting change requests ensure alignment with project goals.",
+    "type": "multi"
+  },
+  {
+    "id": 1080,
+    "topic": "PMP",
+    "text": "The project is delayed due to the high amount of major changes requested by different stakeholders at different stages of the project. If the project continues on the same path, it will consume twice the time and budget planned. What two actions can the project manager take to be more cost-effective? (Choose two.)",
+    "choices": [
+      "Conduct a stakeholder analysis.",
+      "Reinforce team communication.",
+      "Update the project management plan with the new timeline.",
+      "Adopt an incremental approach.",
+      "Leverage work between team members."
+    ],
+    "answers": [
+      "A",
+      "D"
+    ],
+    "explanation": "Conducting stakeholder analysis helps manage change requests, while an incremental approach ensures value delivery with controlled scope.",
+    "type": "multi"
+  },
+  {
+    "id": 1087,
+    "topic": "PMP",
+    "text": "A project sponsor commonly asks the project manager to skip project retrospectives due to time constraints. However, the project manager persists in running this critical ceremony by reducing the time for preparation and discussion. What are two issues that these actions by the project manager could cause? (Choose two.)",
+    "choices": [
+      "A lot of discussions that yield no results or possibly too many results.",
+      "A lack of direction and motivation for the team in the workshop.",
+      "Lessons learned from other teams to not be considered.",
+      "Time management plan for the retrospective workshop to not be updated.",
+      "A focus on the negative and a disinterest in further improvements."
+    ],
+    "answers": [
+      "B",
+      "E"
+    ],
+    "explanation": "Poor preparation and rushed retrospectives can demotivate the team (B) and create a negative atmosphere that discourages continuous improvement (E).",
+    "type": "multi"
+  },
+  {
+    "id": 1099,
+    "topic": "PMP",
+    "text": "During daily calls, team members share task progress. One team member does not usually communicate many details and has critical tasks to be completed. All team members are located in different countries, and critical work is about to start. Which two options will help the project manager in this situation? (Choose two.)",
+    "choices": [
+      "Encourage all team members to use a virtual workspace.",
+      "Ask the team to send emails with detailed task progress.",
+      "Talk to the team member about their engagement and take appropriate action.",
+      "Reassign the work to a resource who participates in the daily calls.",
+      "Report the team member's poor performance to the functional manager."
+    ],
+    "answers": [
+      "A",
+      "C"
+    ],
+    "explanation": "Using a virtual workspace enhances collaboration, while discussing engagement ensures the team member understands expectations.",
+    "type": "multi"
+  },
+  {
+    "id": 1102,
+    "topic": "PMP",
+    "text": "Which two actions should a project manager consider while launching a new virtual team? (Choose two.)",
+    "choices": [
+      "Recruit the best resources within the organization to be part of the virtual team.",
+      "Evaluate the project manager's own strengths and weaknesses as a virtual team leader to identify avoidable pitfalls.",
+      "Identify the types and quantities of resources required for each work package or activity.",
+      "Establish in the beginning how progress will be monitored and the best means for communicating progress.",
+      "Verify if team members are on more than one team and cannot devote enough time to this team."
+    ],
+    "answers": [
+      "B",
+      "D"
+    ],
+    "explanation": "Evaluating leadership effectiveness and defining communication strategies help virtual teams succeed.",
+    "type": "multi"
+  },
+  {
+    "id": 1118,
+    "topic": "PMP",
+    "text": "A team is working on implementing a communications system when the client says that they are considering closing the project. The project manager schedules an urgent meeting with the client to understand why the project is at risk. Which two tools or techniques can the project manager use to influence the client's decision to keep the project active? (Choose two.)",
+    "choices": [
+      "Alternatives analysis",
+      "Voting",
+      "Cost-benefit analysis",
+      "Multi-criteria decision making",
+      "Autocratic decision making"
+    ],
+    "answers": [
+      "A",
+      "C"
+    ],
+    "explanation": "Analyzing alternatives and performing a cost-benefit analysis help demonstrate the project's value and justify continuation.",
+    "type": "multi"
+  },
+  {
+    "id": 1120,
+    "topic": "PMP",
+    "text": "A project team is experiencing delays in completing a task that turned out to be more complex than initially estimated. This is a critical task that could impact current iteration goals. What two options will help the team initially address this obstacle? (Choose two.)",
+    "choices": [
+      "Escalate the issue to the project sponsor.",
+      "Review and update dependencies.",
+      "Schedule a retrospective.",
+      "Conduct a root cause analysis.",
+      "Create a risk management plan."
+    ],
+    "answers": [
+      "B",
+      "D"
+    ],
+    "explanation": "Reviewing dependencies ensures alignment, while root cause analysis helps identify and mitigate the issue.",
+    "type": "multi"
+  },
+  {
+    "id": 1125,
+    "topic": "PMP",
+    "text": "Which three of the following scenarios are impediments to which a Scrum Master should pay attention? (Choose three.)",
+    "choices": [
+      "A team member talking about a user story that is not on the Scrum board.",
+      "A team member talking about a user story that is on the Scrum board.",
+      "A technology that blocks agile capabilities.",
+      "A lack of team empowerment and an inability to self-organize.",
+      "A review of the backlog at daily standup meetings."
+    ],
+    "answers": [
+      "A",
+      "C",
+      "D"
+    ],
+    "explanation": "Off-board discussions, technical blockers, and lack of empowerment are key impediments in agile projects.",
+    "type": "multi"
+  },
+  {
+    "id": 1138,
+    "topic": "PMP",
+    "text": "A project manager is leading a meeting with key stakeholders, the project sponsor, and the product owner to define the features that will be released after the next iteration. The purpose of the meeting is to review the product backlog prioritization, considering that during the past iteration some deliverables were not completed. Which two items should be taken into account first to review and update the product backlog priorities during the meeting? (Choose two.)",
+    "choices": [
+      "Complexity and the cost of development.",
+      "Industry trends and the technical approach.",
+      "Cost of delaying some features against business value.",
+      "Reusing components from another product.",
+      "Length of time each feature has been on the backlog."
+    ],
+    "answers": [
+      "A",
+      "C"
+    ],
+    "explanation": "Complexity, cost of development, and cost of delay impact backlog prioritization.",
+    "type": "multi"
+  },
+  {
+    "id": 1169,
+    "topic": "PMP",
+    "text": "A project manager is scheduled to meet with a client for their weekly risk management meeting. The project manager observed that one of the tasks which had external dependencies is delayed by one week. The project manager knows this will have an impact but does not know the exact details. What two things should the project manager do? (Choose two.)",
+    "choices": [
+      "Discuss the issue with the external supplier's authority.",
+      "Gather additional information and estimate the impact.",
+      "Wait for the client to raise a concern and collect more information.",
+      "Review the lessons learned from similar past projects.",
+      "Update the risk log and bring this up in the meeting with the client."
+    ],
+    "answers": [
+      "A",
+      "B"
+    ],
+    "explanation": "The project manager must first investigate the delay (B) and coordinate with the responsible external party (A) to fully understand the situation before reporting or updating formal logs.",
+    "type": "multi"
+  },
+  {
+    "id": 1236,
+    "topic": "PMP",
+    "text": "A project manager was recently assigned to a banking IT project. The project team has been developing products using a predictive approach for more than 10 years, but management wants the team to change to an agile approach. The project manager met with the team to introduce the agile approach. Most of the team members complained about changing approaches because the performance of this team has always been above average among the IT teams in the bank. Which two actions should the project manager take? (Choose two.)",
+    "choices": [
+      "Interview the most resistant team members to persuade them to try to accept an agile approach.",
+      "Conduct training sessions with the team so that the team can understand what the agile approach and mindset are.",
+      "Brainstorm with the team to understand the specifics of the team's project and to identify possible alternative approaches.",
+      "Ask the team to identify the product backlog and create a kanban board for the team to manage and follow the approach.",
+      "Meet with management to explain the team's resistance to the agile approach and request that they formally ask the team to implement agile."
+    ],
+    "answers": [
+      "B",
+      "C"
+    ],
+    "explanation": "Training helps the team understand agile methodologies, while brainstorming enables the team to find an approach that best fits their work style.",
+    "type": "multi"
+  },
+  {
+    "id": 1244,
+    "topic": "PMP",
+    "text": "A project manager is leading a digital transformation project in a large geographically distributed organization. During the execution phase, the project team noticed that the organization's employees and heads of departments have different perceptions and expectations of the project and its outcome. The project manager is afraid that it may impact the project's success. Which two actions can the project manager do to resolve this issue? (Choose two.)",
+    "choices": [
+      "Foster stakeholder engagement in order to improve communication.",
+      "Discuss the issue with the project sponsor in order to handle it efficiently.",
+      "Share the project objectives to ensure they are properly digested.",
+      "Insist on face-to-face meetings in order to understand the real concerns.",
+      "Proceed as planned as these situations are quite common in large projects."
+    ],
+    "answers": [
+      "A",
+      "C"
+    ],
+    "explanation": "Engaging stakeholders and ensuring clear communication of project objectives helps align expectations and reduce misunderstandings that could impact project success.",
+    "type": "multi"
+  },
+  {
+    "id": 1251,
+    "topic": "PMP",
+    "text": "Three testers joined the project team just before the end of the build. During the project team meeting, the testers indicated that the project quality is poor, and they should not continue testing until all the defects are fixed. Which three actions should the project manager do? (Choose three.)",
+    "choices": [
+      "Stop the project and review the output.",
+      "Ask the testers to provide additional information.",
+      "Brainstorm the issue with the project team.",
+      "Continue with testing according to the plan.",
+      "Ask the sponsor for assistance and guidance."
+    ],
+    "answers": [
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": "Gathering more details, brainstorming with the team, and proceeding with planned testing helps identify and resolve quality issues.",
+    "type": "multi"
+  },
+  {
+    "id": 1286,
+    "topic": "PMP",
+    "text": "During the execution phase of a project, one of the customer's stakeholders keeps requesting changes to the scope every week. Which three actions should the project manager take to resolve this issue? (Choose three.)",
+    "choices": [
+      "Update the relevant project documents with this obstacle.",
+      "Highlight the impacts of the changes during the next project meeting.",
+      "Adjust the project management plan to include the changes in scope.",
+      "Continue the execution as planned and defer the changes to a future phase.",
+      "Schedule a meeting with the customer to align the approach."
+    ],
+    "answers": [
+      "A",
+      "B",
+      "E"
+    ],
+    "explanation": "Documenting the issue, communicating the impacts, and aligning with the customer on an approach ensures effective scope management.",
+    "type": "multi"
+  },
+  {
+    "id": 1349,
+    "topic": "PMP",
+    "text": "A project manager is working on a project with three virtual teams. Team A is in a different time zone than teams B and C. The project was going well, but recently team A has started feeling left out. Information reaches team A late or is sometimes missed, and teams B and C give preference to each other's problems over team A. The project manager has already set project guidelines, but realizes they need to be improved. Which two things should the project manager do to help the teams collaborate better? (Choose two.)",
+    "choices": [
+      "Update the communications management plan and encourage the teams to review it promptly and proactively.",
+      "Schedule weekly progress meetings with all three teams and have them take turns as key players.",
+      "Create a status reporting template and share it with all team members before the day ends.",
+      "Plan for team members to temporarily work at each other's locations to better provide a sense of community.",
+      "Schedule daily meetings with each team to understand their progress and concerns in detail."
+    ],
+    "answers": [
+      "A",
+      "B"
+    ],
+    "explanation": "Updating the communications management plan and rotating team responsibilities ensure better inclusion and team collaboration.",
+    "type": "multi"
+  },
+  {
+    "id": 1392,
+    "topic": "PMP",
+    "text": "A team is testing a product on multiple radio frequencies. The project manager is informed that a new government policy, expected in 2 weeks, will mandate companies to obtain approval and licensing for frequency testing. The team has completed 80% of the testing and needs 4 weeks to complete the remaining tests. Which two actions should the project manager take until the approval is received? (Choose two.)",
+    "choices": [
+      "Hire a vendor with the required expertise and infrastructure to complete the testing.",
+      "Stop testing immediately and escalate the issue to senior management for a decision.",
+      "Allow testing to continue for the complete duration as the policy may not apply to ongoing projects.",
+      "Update the project risk checklist to consider licensing and approvals for risk identification.",
+      "Reallocate the testing resources to complete testing early before the policy takes effect."
+    ],
+    "answers": [
+      "D",
+      "E"
+    ],
+    "explanation": "Updating the risk checklist ensures proactive management of regulatory risks, and reallocating resources helps complete the testing before the new policy takes effect.",
+    "type": "multi"
+  },
+  {
+    "id": 1416,
+    "topic": "PMP",
+    "text": "A project manager's transformation project has been delayed due to unexpected issues with the information technology (IT) systems. These issues are likely to impact the project budget, but the project manager is working hard to make ensure there is no impact on the project's schedule and scope. Which two actions should the project manager take before proposing a budget rebaseline to upper management for approval? (Choose two.)",
+    "choices": [
+      "Consider schedule compression techniques to shorten or accelerate the schedule duration without reducing the project scope.",
+      "Consider using resource leveling to more accurately reflect the work commitments of the resources.",
+      "Apply data analysis techniques, variance analysis, and trend analysis.",
+      "Analyze the budget based on the revised estimates and responses from similar situations in the past.",
+      "Raise a change request with high priority to be discussed in the upcoming governance meetings."
+    ],
+    "answers": [
+      "C",
+      "D"
+    ],
+    "explanation": "Before proposing a new budget baseline, the project manager should perform analysis to support the proposal and review lessons learned or past responses.",
+    "type": "multi"
+  }
+];
+
+const S = {
+  theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+  totalSeconds: 60*60,
+  seconds: 60*60,
+  started: false,
+  submitted: false,
+  tid: null,
+  answers: {},
+  flagged: new Set(),
+  visited: new Set(),
+  currentIndex: 0,
+  startTime: null
+};
+
+const $ = id => document.getElementById(id);
+
+function iconFor(t){
+  return t==='dark'
+    ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+    : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+}
+function setTheme(t){
+  S.theme = t;
+  document.documentElement.setAttribute('data-theme', t);
+  ['themeBtn','themeBtn2','themeBtn3'].forEach(id=>{ const el=$(id); if(el) el.innerHTML=iconFor(t); });
+}
+['themeBtn','themeBtn2','themeBtn3'].forEach(id=>{
+  document.addEventListener('click', e=>{
+    if(e.target.closest('#'+id)) setTheme(S.theme==='dark'?'light':'dark');
+  });
+});
+
+function show(screen){
+  ['welcomeScreen','examScreen','resultsScreen'].forEach(id=>$(id).classList.add('hidden'));
+  $(screen).classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+$('totalQ').textContent = QUESTIONS.length;
+$('startBtn').onclick = ()=>{
+  S.started = true;
+  S.startTime = Date.now();
+  S.visited.add(QUESTIONS[0].id);
+  buildNav();
+  renderQuestion();
+  updateSidebar();
+  startTimer();
+  show('examScreen');
+};
+
+function fmt(sec){
+  const m = Math.floor(sec/60), s = sec%60;
+  return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+function startTimer(){
+  clearInterval(S.tid);
+  S.tid = setInterval(()=>{
+    if(S.submitted){ clearInterval(S.tid); return; }
+    S.seconds--;
+    if(S.seconds <= 0){
+      S.seconds = 0;
+      $('timeDisplay').textContent = fmt(0);
+      doSubmit(true);
+      return;
+    }
+    $('timeDisplay').textContent = fmt(S.seconds);
+    const tc = $('timerCard');
+    tc.classList.toggle('warn', S.seconds<=20*60 && S.seconds>10*60);
+    tc.classList.toggle('critical', S.seconds<=10*60);
+  }, 1000);
+}
+
+function buildNav(){
+  const grid = $('navGrid');
+  grid.innerHTML = '';
+  QUESTIONS.forEach((q,i)=>{
+    const b = document.createElement('button');
+    b.className = 'nav-btn';
+    b.textContent = i+1;
+    b.onclick = ()=>{ S.currentIndex=i; S.visited.add(q.id); renderQuestion(); updateSidebar(); };
+    grid.appendChild(b);
+  });
+}
+function isAnswered(q){
+  const a = S.answers[q.id] || [];
+  return q.type === 'single' ? a.length === 1 : a.length === q.answers.length;
+}
+
+function updateNav(){
+  const buttons = $('navGrid').children;
+  QUESTIONS.forEach((q,i)=>{
+    const b = buttons[i];
+    b.classList.toggle('answered', isAnswered(q));
+    b.classList.toggle('current', i===S.currentIndex);
+    b.classList.toggle('flagged', S.flagged.has(q.id));
+  });
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[S.currentIndex];
+  S.visited.add(q.id);
+  const selected = S.answers[q.id]||[];
+  const badge = q.type==='single' ? 'Select one' : `Select exactly ${q.answers.length}`;
+  const inputType = q.type==='single' ? 'radio' : 'checkbox';
+
+  const opts = q.choices.map((c,idx)=>{
+    const letter = String.fromCharCode(65+idx);
+    const isSel = selected.includes(letter);
+    return `<label class="opt ${isSel?'selected':''}">
+      <input type="${inputType}" name="q${q.id}" value="${letter}" ${isSel?'checked':''}>
+      <span class="opt-letter">${letter}.</span>
+      <span>${escapeHtml(c)}</span>
+    </label>`;
+  }).join('');
+
+  $('qcard').innerHTML = `
+    <div class="qhead">
+      <div class="left">
+        <span class="tag">${q.topic}</span>
+        <span class="tag" style="background:transparent;border:1px solid var(--border);color:var(--muted)">${badge}</span>
+      </div>
+      <span class="muted" style="font-size:.85rem;font-weight:600">Question ${S.currentIndex+1} of ${QUESTIONS.length}</span>
+    </div>
+    <div class="qtext">${escapeHtml(q.text)}</div>
+    <div class="opts">${opts}</div>
+  `;
+
+  $('qcard').querySelectorAll(`input[name="q${q.id}"]`).forEach(inp=>{
+    inp.onchange = ()=>{
+      if(q.type !== 'single'){
+        const checkedNow = [...$('qcard').querySelectorAll(`input[name="q${q.id}"]:checked`)];
+        if(checkedNow.length > q.answers.length){
+          inp.checked = false;
+        }
+      }
+      const vals = [...$('qcard').querySelectorAll(`input[name="q${q.id}"]:checked`)].map(x=>x.value);
+      S.answers[q.id] = vals;
+      $('qcard').querySelectorAll('.opt').forEach(o=>{
+        const v = o.querySelector('input').value;
+        o.classList.toggle('selected', vals.includes(v));
+      });
+      updateSidebar();
+    };
+  });
+
+  $('flagBtn').classList.toggle('active', S.flagged.has(q.id));
+  $('flagBtn').innerHTML = S.flagged.has(q.id) ? '⚑ Flagged' : '⚑ Flag for Review';
+  $('prevBtn').disabled = S.currentIndex===0;
+  $('nextBtn').disabled = S.currentIndex>=QUESTIONS.length-1;
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function updateSidebar(){
+  const answered = QUESTIONS.filter(q=>isAnswered(q)).length;
+  $('answeredCount').textContent = answered;
+  $('totalCount').textContent = QUESTIONS.length;
+  $('progressFill').style.width = (answered/QUESTIONS.length*100)+'%';
+  updateNav();
+}
+
+$('prevBtn').onclick = ()=>{ if(S.currentIndex>0){ S.currentIndex--; renderQuestion(); updateSidebar(); }};
+$('nextBtn').onclick = ()=>{ if(S.currentIndex<QUESTIONS.length-1){ S.currentIndex++; renderQuestion(); updateSidebar(); }};
+$('flagBtn').onclick = ()=>{
+  const q = QUESTIONS[S.currentIndex];
+  if(S.flagged.has(q.id)) S.flagged.delete(q.id); else S.flagged.add(q.id);
+  renderQuestion(); updateSidebar();
+};
+
+$('submitBtn').onclick = ()=>{
+  const answered = QUESTIONS.filter(q=>isAnswered(q)).length;
+  const unans = QUESTIONS.length - answered;
+  $('modalMsg').textContent = unans>0
+    ? `You have ${unans} unanswered question${unans>1?'s':''}. Submit anyway? You won't be able to change your answers.`
+    : `You've answered all ${QUESTIONS.length} questions. Ready to submit?`;
+  $('confirmModal').classList.remove('hidden');
+};
+$('cancelSubmit').onclick = ()=>$('confirmModal').classList.add('hidden');
+$('confirmSubmit').onclick = ()=>{ $('confirmModal').classList.add('hidden'); doSubmit(false); };
+
+function doSubmit(auto){
+  if(S.submitted) return;
+  S.submitted = true;
+  clearInterval(S.tid);
+
+  let correct=0, wrong=0, unans=0;
+  const missed = [];
+  QUESTIONS.forEach(q=>{
+    const got = (S.answers[q.id]||[]).slice().sort();
+    const want = q.answers.slice().sort();
+    if(got.length===0){ unans++; missed.push({q,got:[],want,type:'unanswered'}); return; }
+    if(got.length < want.length){ unans++; missed.push({q,got,want,type:'incomplete'}); return; }
+    const isRight = got.length===want.length && got.every((v,i)=>v===want[i]);
+    if(isRight) correct++; else { wrong++; missed.push({q,got,want,type:'wrong'}); }
+  });
+
+  const pct = Math.round(correct/QUESTIONS.length*100);
+  const pass = pct>=80;
+  const timeTaken = S.totalSeconds - S.seconds;
+
+  $('scorePct').textContent = pct+'%';
+  $('scoreCircle').style.setProperty('--pct', pct);
+  $('passBadge').textContent = pass ? '✓ PASSED' : '✗ NOT PASSED';
+  $('passBadge').className = 'badge '+(pass?'pass':'fail');
+  $('rCorrect').textContent = correct;
+  $('rWrong').textContent = wrong;
+  $('rUnans').textContent = unans;
+  $('rTime').textContent = fmt(timeTaken);
+
+  const list = $('reviewList');
+  if(missed.length===0){
+    list.innerHTML = `<div class="review-item" style="border-left-color:var(--success)"><div class="qt right">🎉 Perfect score — you got every question right!</div></div>`;
+  } else {
+    list.innerHTML = missed.map(m=>{
+      const fmtAns = (letters) => {
+        if(!letters || !letters.length) return '<em>No answer selected</em>';
+        return letters.map(l => {
+          const idx = l.charCodeAt(0) - 65;
+          const txt = m.q.choices[idx] || '';
+          return `<div class="ans-line"><span class="ans-letter">${l}.</span>${escapeHtml(txt)}</div>`;
+        }).join('');
+      };
+      const gotStr = fmtAns(m.got);
+      const fmtAllChoices = () => {
+        const gotSet = new Set(m.got || []);
+        const wantSet = new Set(m.want || []);
+        return m.q.choices.map((txt, idx) => {
+          const letter = String.fromCharCode(65 + idx);
+          const isSelected = gotSet.has(letter);
+          const isCorrect = wantSet.has(letter);
+          const classes = ['ans-line'];
+          if(isSelected) classes.push('user-selected');
+          if(isCorrect) classes.push('correct-choice');
+          const notes = [];
+          if(isSelected) notes.push('Your choice');
+          if(isCorrect) notes.push('Correct');
+          const noteHtml = notes.length ? `<span class="ans-note">${notes.join(' · ')}</span>` : '';
+          return `<div class="${classes.join(' ')}"><span class="ans-letter">${letter}.</span>${escapeHtml(txt)}${noteHtml}</div>`;
+        }).join('');
+      };
+      const allChoicesStr = fmtAllChoices();
+      const expl = m.q.explanation || 'No explanation available.';
+      return `<div class="review-item">
+        <div class="qnum">Question ${m.q.id} · ${m.type==='unanswered'?'Skipped':(m.type==='incomplete'?'Incomplete':'Incorrect')}</div>
+        <div class="qt">${escapeHtml(m.q.text)}</div>
+        <div class="ans"><strong>Your answer</strong><div class="ans-body wrong">${gotStr}</div></div>
+        <div class="ans"><strong>All answer choices</strong><div class="ans-body all">${allChoicesStr}</div></div>
+        <div class="expl"><strong>Explanation:</strong> ${escapeHtml(expl)}</div>
+      </div>`;
+    }).join('');
+  }
+
+  if(auto){
+    const note = document.createElement('div');
+    note.className='muted';
+    note.style.textAlign='center';
+    note.style.marginTop='.5rem';
+    note.textContent='⏱ Time expired — exam auto-submitted.';
+    $('scoreCircle').parentNode.appendChild(note);
+  }
+
+  show('resultsScreen');
+}
+
+$('retakeBtn').onclick = ()=>{ resetAll(); $('startBtn').click(); };
+$('homeBtn').onclick = ()=>{ resetAll(); show('welcomeScreen'); };
+function resetAll(){
+  clearInterval(S.tid);
+  S.started=false; S.submitted=false;
+  S.answers={}; S.flagged=new Set(); S.visited=new Set();
+  S.currentIndex=0; S.seconds=S.totalSeconds;
+  $('timeDisplay').textContent = fmt(S.seconds);
+  $('timerCard').classList.remove('warn','critical');
+}
+
+setTheme(S.theme);
+$('totalCount').textContent = QUESTIONS.length;
+</script>
+</body>
+</html>
